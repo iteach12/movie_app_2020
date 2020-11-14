@@ -1,58 +1,33 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import PropTypes from 'prop-types';
 
+class App extends React.Component{
 
-function Food({name, picture, rating}){
-  
-  
-  return (<div>
-  <h2>I love {name}.</h2>
-  <h4>{rating}/5.0</h4>
-  <img src={picture} alt={name} />
+  state = {
+    isLoading: true,
+    movie: [],
+  };
 
-  </div>
-  
-  );
-}
+  componentDidMount(){
 
-
-const foodILike = [
-  {
-    id:1,
-    name: 'kimchi',
-    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.6Mea2CXE0T5R9pbPWubGUgHaEK%26pid%3DApi&f=1',
-    rating: 5
-  },
-  {
-    id:2,
-    name: 'sam',
-    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.GLxnJpKDohpsrPZQGrGywQHaE7%26pid%3DApi&f=1',
-    rating: 2
-  },
-  {
-    id:3,
-    name: 'kimbab',
-    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.7-rpW2ynK3Mq89GWd2Q36QHaE8%26pid%3DApi&f=1',
-    rating: 1
+    //영화 데이터 로딩
+    setTimeout(() => {
+      this.setState({isLoading:false});
+    }, 6000);
   }
-];
 
+  render(){
 
-function App() {
-  
-  return(
-    <div>
-      {foodILike.map(dish => <Food  key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating} />)}
-    </div>
-    );
+    const {isLoading} = this.state;
+
+  return(<div>{isLoading ? 'Loading...' : 'We are ready'}</div>);
+  }
 }
 
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
-};
+
+
+
 
 
 export default App;
